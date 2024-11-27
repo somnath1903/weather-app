@@ -1,186 +1,158 @@
-/* Reset and Global Styling */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
 }
 
-/* Main Container */
-.container {
-    width: 100%;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #153677, #4e085f);
+body {
+    background-color: #222;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    height: 100vh;
 }
 
-/* To-Do App Card */
-.todo-app {
+.card {
     width: 100%;
-    max-width: 540px;
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    padding: 40px 30px;
+    max-width: 480px;
+    background: linear-gradient(135deg, #3b6b7f, #6b5e8c);
+    color: #fff;
+    border-radius: 20px;
+    padding: 40px 35px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
+    transition: transform 0.3s ease;
 }
 
-/* Header */
-.todo-app h2 {
-    color: #002765;
-    font-size: 24px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.card:hover {
+    transform: scale(1.05);
 }
 
-.todo-app h2 img {
-    width: 30px;
-    margin-left: 10px;
-}
-
-/* Input Row */
-.row {
+.search {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #edeef0;
-    border-radius: 30px;
-    padding: 10px 20px;
-    margin: 20px 0;
 }
 
-input {
+.search input {
+    border: 0;
+    outline: 0;
+    background: #ffffff;
+    color: #555;
+    padding: 10px 25px;
+    height: 60px;
+    border-radius: 30px;
     flex: 1;
-    border: none;
-    outline: none;
-    background: transparent;
-    padding: 10px;
-    font-size: 16px;
-    color: #333;
+    margin-right: 16px;
+    font-size: 18px;
+    transition: 0.3s ease-in-out;
 }
 
-input::placeholder {
-    color: #aaa;
-    font-size: 14px;
+.search input:focus {
+    background-color: #f0f8ff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
 }
 
-button {
-    border: none;
-    outline: none;
-    padding: 12px 30px;
-    background: #ff4945;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
+.search button {
+    border: 0;
+    outline: 0;
+    background: #ffffff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
     cursor: pointer;
-    border-radius: 30px;
     transition: background 0.3s ease;
 }
 
-button:hover {
-    background: #ff726f;
+.search button:hover {
+    background: #f0f8ff;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5);
 }
 
-/* Task List */
-ul {
-    margin-top: 20px;
-    list-style: none;
+.search button img {
+    width: 22px;
 }
 
-ul li {
-    font-size: 17px;
-    padding: 12px 20px;
-    margin: 10px 0;
-    background: #f9f9f9;
-    border-radius: 10px;
+.weather-icon {
+    width: 150px;
+    margin-top: 30px;
+    transition: transform 0.3s ease;
+}
+
+.weather-icon:hover {
+    transform: rotate(15deg);
+}
+
+.weather h1 {
+    font-size: 90px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.weather h2 {
+    font-size: 50px;
+    font-weight: 400;
+    margin-top: -10px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+}
+
+.details {
     display: flex;
     align-items: center;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.2s ease, background 0.3s ease;
+    justify-content: space-around;
+    padding: 20px;
+    margin-top: 30px;
 }
 
-ul li:hover {
-    transform: scale(1.02);
-    background: #f1f1f1;
+.col {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    justify-content: center;
 }
 
-ul li::before {
-    content: '';
-    position: absolute;
-    height: 24px;
-    width: 24px;
-    border-radius: 50%;
-    background-image: url('To-Do-Img/images/unchecked.png');
-    background-size: cover;
-    background-position: center;
-    left: 15px;
+.col img {
+    width: 40px;
+    margin-right: 10px;
 }
 
-ul li.checked {
-    color: #777;
-    text-decoration: line-through;
+.humidity, .wind {
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: auto;
+    color: #ffeb3b;
 }
 
-ul li.checked::before {
-    background-image: url('To-Do-Img/images/checked.png');
-}
-
-/* Delete Button */
-ul li span {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
-    color: #555;
-    background: #e8e8e8;
-    border-radius: 50%;
-    line-height: 35px;
-    text-align: center;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-ul li span:hover {
-    background: #ff4945;
-    color: #fff;
-    transform: scale(1.1);
+.col div p {
+    font-size: 16px;
+    color: #ccc;
+    margin-top: 5px;
+    font-weight: 300;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    .todo-app {
+@media screen and (max-width: 768px) {
+    .card {
         padding: 20px 15px;
     }
 
-    button {
-        padding: 12px 20px;
-        font-size: 14px;
+    .weather h1 {
+        font-size: 70px;
     }
 
-    ul li {
-        font-size: 15px;
-        padding: 10px 15px;
+    .weather h2 {
+        font-size: 40px;
     }
 
-    ul li::before {
-        height: 20px;
-        width: 20px;
-        left: 10px;
+    .humidity, .wind {
+        font-size: 24px;
     }
 
-    ul li span {
-        width: 30px;
-        height: 30px;
+    .search input {
+        padding: 10px 20px;
         font-size: 16px;
-        line-height: 30px;
     }
 }
