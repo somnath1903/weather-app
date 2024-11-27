@@ -1,39 +1,39 @@
-const inputbox = document.getElementById("input-box");
-const listcontainer = document.getElementById("list-container");
+const apikey = "c6b5d1e22f76f0569f45868402dd6791";
+const apiurl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
-function addTask() {
-  if (inputbox.value === '') {
-    alert("You must write something");
-  } else {
-    let li = document.createElement("li");
-    li.innerHTML = inputbox.value;
-    listcontainer.appendChild(li);
+const searchBox = document.querySelector(".search input");
+const searchBtn = document.querySelector(".search button");
 
-    let span = document.createElement("span");
-    span.innerHTML = "\u00d7"; // Unicode for '×' symbol
-    li.appendChild(span); // Append the span to the list item
-  }
-  inputbox.value = "";
-  saveData(); // Save the updated list
+async function checkWeather(city) {
+    try {
+        if (!city) {
+            throw new Error("City name cannot be empty.");
+        }
+
+        const requestUrl = apiurl + city + `&appid=${apikey}`;
+        console.log("API Request URL:", requestUrl); // Debugging
+
+        const response = await fetch(requestUrl);
+        if (!response.ok) {
+            throw new Error("City not found or invalid query.");
+        }
+
+        const data = await response.json();
+        console.log("API Response:", data); // Debugging
+
+        // Update the weather information
+        document.querySelector(".city").innerHTML = data.name;
+        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+        document.querySelector(".wind").innerHTML = data.wind.speed + " Km/h";
+    } catch (error) {
+        console.error("Error:", error.message);
+        alert(error.message);
+    }
 }
 
-listcontainer.addEventListener("click", function (e) {
-  if (e.target.tagName === 'LI') {
-    e.target.classList.toggle("checked");
-    saveData(); // Save the updated state
-  } else if (e.target.tagName === 'SPAN') {
-    e.target.parentElement.remove();
-    saveData(); // Save the updated list
-  }
-}, false);
-
-function saveData() {
-  localStorage.setItem("data", listcontainer.innerHTML);
-}
-
-function loadData() {
-  listcontainer.innerHTML = localStorage.getItem("data");
-}
-
-// Load data when the page loads
-loadData();
+searchBtn.addEventListener("click", () => {
+    const city = searchBox.value.trim();
+    console.log("Search button clicked. City entered:", city); // Debugging
+    checkWeather(city);
+});
